@@ -6,16 +6,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send("🚀 API rodando! Use /auth para autenticar.");
+    res.send("🚀 API rodando! Acesse /auth para autenticar.");
 });
 
-// 🔗 **Redireciona para a URL de autorização do Bling**
+// 🔗 **Redireciona para a autorização do Bling**
 app.get('/auth', (req, res) => {
     const authUrl = `https://www.bling.com.br/Api/v3/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=12345`;
     res.redirect(authUrl);
 });
 
-// 🔄 **Recebe o código de autorização (auth_code)**
+// 🔄 **Recebe o código de autorização do Bling**
 app.get('/auth/callback', async (req, res) => {
     const authCode = req.query.code;
 
