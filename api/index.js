@@ -5,22 +5,23 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ✅ Rota principal para verificar se a API está rodando
 app.get('/', (req, res) => {
-    res.send("🚀 API rodando! Acesse /auth para autenticar.");
+    res.send('🚀 API rodando no Vercel! Use /auth para autenticação.');
 });
 
-// 🔗 **Redireciona para a autorização do Bling**
+// ✅ Redireciona para a autenticação no Bling
 app.get('/auth', (req, res) => {
     const authUrl = `https://www.bling.com.br/Api/v3/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=12345`;
     res.redirect(authUrl);
 });
 
-// 🔄 **Recebe o código de autorização do Bling**
+// ✅ Callback para capturar o código de autorização
 app.get('/auth/callback', async (req, res) => {
     const authCode = req.query.code;
 
     if (!authCode) {
-        return res.status(400).send("⚠️ Código de autorização não encontrado!");
+        return res.status(400).send('⚠️ Código de autorização não encontrado!');
     }
 
     console.log(`🔑 Código de autorização recebido: ${authCode}`);
@@ -37,10 +38,10 @@ app.get('/auth/callback', async (req, res) => {
             }
         });
 
-        console.log('✅ Token gerado:', response.data);
-        res.json(response.data);  // Mostra o token no navegador
+        console.log('✅ Token gerado com sucesso:', response.data);
+        res.json(response.data);
     } catch (error) {
-        console.error('❌ Erro ao obter o token:', error.response?.data || error);
+        console.error('❌ Erro ao obter o token:', error.response?.data || error.message);
         res.status(500).json({ error: error.response?.data || error.message });
     }
 });
@@ -48,3 +49,5 @@ app.get('/auth/callback', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
+
+module.exports = app;
