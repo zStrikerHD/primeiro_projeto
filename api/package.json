@@ -1,6 +1,13 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'No build step needed'"
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.0.3"
   }
 }
