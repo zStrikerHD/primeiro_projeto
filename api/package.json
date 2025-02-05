@@ -1,13 +1,6 @@
 {
-  "name": "primeiro-projeto",
-  "version": "1.0.0",
-  "description": "Projeto hospedado na Vercel",
-  "main": "api/auth.js",
   "scripts": {
-    "start": "vercel dev"
-  },
-  "dependencies": {
-    "axios": "^1.7.9",
-    "dotenv": "^16.4.7"
+    "start": "node server.js",
+    "build": "echo 'No build step needed' "
   }
 }
