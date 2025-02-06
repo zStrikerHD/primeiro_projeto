@@ -26,6 +26,7 @@ app.get('/auth', (req, res) => {
 // ✅ Redireciona para a autenticação no Bling
 app.get('/auth', (req, res) => {
     const authUrl = `https://www.bling.com.br/Api/v3/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=12345`;
+    console.log("🔗 URL de autenticação gerada:", authUrl);
     res.redirect(authUrl);
 });
 
@@ -59,7 +60,8 @@ app.get('/auth/callback', async (req, res) => {
         res.status(500).json({ error: error.response?.data || error.message });
     }
 });
-
+console.log("🔎 CLIENT_ID:", process.env.CLIENT_ID);
+console.log("🔎 REDIRECT_URI:", process.env.REDIRECT_URI);
 
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
