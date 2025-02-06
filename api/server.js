@@ -10,7 +10,7 @@ console.log("✅ Servidor iniciando...");
 // Rota principal
 app.get('/', (req, res) => {
     console.log("✅ Rota '/' acessada");
-    res.send('🚀 API rodando no Vercel! Use /auth para autenticação.');
+    res.send('🚀 API rodando no Railway! Use /auth para autenticação.');
 });
 
 // Rota de autenticação
