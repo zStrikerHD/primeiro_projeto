@@ -11,11 +11,15 @@ console.log("✅ CLIENT_ID:", process.env.CLIENT_ID || "⚠️ Não definido!");
 console.log("✅ CLIENT_SECRET:", process.env.CLIENT_SECRET ? "Definido" : "⚠️ Não definido!");
 console.log("✅ REDIRECT_URI:", process.env.REDIRECT_URI || "⚠️ Não definido!");
 
-// ✅ Rota principal para verificar se a API está rodando
+app.get('/', (req, res) => {
+    res.send('🚀 API rodando no Vercel! Use /auth para autenticação.');
+});
+
+// ✅ Redireciona para a autenticação no Bling
 app.get('/auth', (req, res) => {
-    console.log("🔄 Redirecionando para autenticação no Bling...");
-    console.log(`🔗 URL de autenticação: ${process.env.REDIRECT_URI}`);
     const authUrl = `https://www.bling.com.br/Api/v3/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=12345`;
+    console.log(`🔄 Redirecionando para autenticação no Bling...`);
+    console.log(`🔗 URL de autenticação: ${authUrl}`);
     res.redirect(authUrl);
 });
 
